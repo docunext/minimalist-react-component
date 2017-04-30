@@ -2,12 +2,13 @@
   "name": "simple-component",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.es6.js",
   "scripts": {
+    "start": "babel-node src/server.es6.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Albert Lash",
+  "license": "MIT",
   "dependencies": {
     "express": "^4.15.2",
     "react": "^15.5.4",
@@ -25,13 +26,14 @@
       ],
       "stage-2",
       "react"
-    ],
-    "env": {
-      "test": {
-        "plugins": [
-          "rewire"
-        ]
-      }
-    }
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack": "^2.4.1"
   }
 }
