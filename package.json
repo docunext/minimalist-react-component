@@ -4,15 +4,18 @@
   "description": "",
   "main": "src/server.es6.js",
   "scripts": {
+    "build": "webpack",
     "start": "babel-node src/server.es6.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "author": "Albert Lash",
   "license": "MIT",
   "dependencies": {
     "express": "^4.15.2",
+    "prop-types": "^15.5.8",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "serialize-javascript": "^1.3.0"
   },
   "babel": {
     "presets": [
@@ -29,11 +32,19 @@
     ]
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.5.1",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
     "babel-preset-env": "^1.4.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "webpack": "^2.4.1"
+    "chai": "^3.5.0",
+    "enzyme": "^2.8.2",
+    "mocha": "^3.3.0",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4",
+    "webpack": "^2.4.1",
+    "webpack-bundle-analyzer": "^2.4.0"
   }
 }
