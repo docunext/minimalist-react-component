@@ -5,6 +5,7 @@ import Html from './components/Html';
 import World from './components/World';
 import path from 'path';
 
+const serverPort = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../build/public')));
@@ -28,6 +29,6 @@ app.get('/nossr', (req, res, next) => {
   res.send(html);
 });
 
-app.listen(3000, () => {
-  console.info(`The server is running at http://localhost:3000/`);
+app.listen(serverPort, () => {
+  console.info(`The server is running at http://localhost:${serverPort}/`);
 });
