@@ -9,7 +9,7 @@ class World extends React.Component {
           <a href="/ssr">SSR</a>
         </p>
         <p>
-          <a href="/nossr">NO SSR</a>
+          <a href="/ssr/off">NO SSR</a>
         </p>
       </div>
     );

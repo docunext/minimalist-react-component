@@ -25,7 +25,7 @@ app.get('/ssr', (req, res, next) => {
 
 const html = '<!doctype html><html class="no-js" lang="en"><head><meta charset="utf-8"/><title>Hi</title><meta name="description" content="Hi"/></head><body><div id="app"></div><script src="/assets/client.js"></script></body></html>';
 
-app.get('/nossr', (req, res, next) => {
+app.get('/ssr/off', (req, res, next) => {
   res.send(html);
 });
 
