@@ -1,22 +1,21 @@
-import World from '../components/World'
+export default {
 
-/*  Note: Instead of using JSX, we recommend using react-router
-    PlainRoute objects to build route definitions.   */
+  path: '/',
 
-export const Child = (store) => ({
-  path : 'off',
-  component   : World
-})
+  // Keep in mind, routes are evaluated in order
+  children: [
+    require('./Home').default,
+  ],
 
-export const createRoutes = (store) => ({
-  path        : '/ssr',
-  component   : World,
-  indexRoute  : World,
-  childRoutes : [
-    Child(store)
-  ]
-})
+  async action({ next }) {
+    // Execute each child route until one of them return the result
+    const route = await next();
 
+    // Provide default values for title, description etc.
+    // Thanks to www.reactstarterkit.com
+    route.title = `${route.title || 'Untitled Page'}`;
+    route.description = route.description || '';
 
-
-export default createRoutes;
+    return route;
+  },
+};

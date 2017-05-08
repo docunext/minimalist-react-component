@@ -1,19 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from './store/createStore'
-import AppContainer from './containers/AppContainer';
+import App from './components/App';
+import createFetch from './createFetch';
+import history from './history';
 
 const initialState = window.__INITIAL_STATE__;
-const store = createStore(initialState);
 const MOUNT_NODE = document.getElementById('app');
-
-let render = () => {
-    const routes = require('./routes/index').default(store);
-
-    ReactDOM.render(
-      <AppContainer store={store} routes={routes} />,
-      MOUNT_NODE
-    );
+const context = {
+  // Enables critical path CSS rendering
+  // https://github.com/kriasoft/isomorphic-style-loader
+  insertCss: (...styles) => {
+    // eslint-disable-next-line no-underscore-dangle
+    const removeCss = styles.map(x => x._insertCss());
+    return () => { removeCss.forEach(f => f()); };
+  },
+  // Universal HTTP client
+  fetch: createFetch({
+    baseUrl: window.App.apiUrl,
+  }),
 };
 
-render();
+
+let currentLocation = history.location;
+let router = require('./router').default;
+
+async function onLocationChange(location, action) {
+
+	const route = await router.resolve({
+	  path: location.pathname,
+	  fetch: context.fetch,
+	});
+	
+    currentLocation = location;
+
+	ReactDOM.render(
+	  <App context={context}>{route.component}</App>,
+	  MOUNT_NODE
+	);
+
+}
+
+history.listen(onLocationChange);
+onLocationChange(currentLocation);
