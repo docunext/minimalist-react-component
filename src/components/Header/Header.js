@@ -5,28 +5,18 @@ import s from './Header.css';
 import Link from '../Link';
 import SetName from '../../containers/setName';
 
-export class Header extends React.Component {
-    constructor(props) {
-        super(props);
-        this.linkText = props.myName || 'Something';
-    }
-
-    render() {
-        this.linkText = this.props.myName || 'Something';
-        return (
-            <div className={s.header}>
-                <ul>
-                <li>
-                <SetName />
-                </li>
-                <li>
-                <Link to="/">{this.linkText}</Link>
-                </li>
-                </ul>
-            </div>
-        );
-    }
-}
+const Header = (props) => (
+    <div className={s.header}>
+        <ul>
+        <li>
+        <SetName />
+        </li>
+        <li>
+        <Link to="/">{props.myName || 'Something'}</Link>
+        </li>
+        </ul>
+    </div>
+);
 
 const mapStateToProps = (state, ownProps) => {
   let myName = state.testApp.myName || '';
