@@ -6,26 +6,26 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
-const pkg = require('./package.json');
 
 const isDebug = !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose');
 
 const clientConfig = {
 
+  context: path.resolve(__dirname, '..'),
+
   name: 'client',
   target: 'web',
 
   entry: {
-    client: ['./src/client.js'],
+    client: ['babel-polyfill', './src/client.js'],
   },
 
   output: {
-    path: path.resolve(__dirname, './build/public/assets'),
+    path: path.resolve(__dirname, '../build/public/assets'),
     publicPath: '/assets/',
     pathinfo: isVerbose,
     filename: '[name].js'
@@ -33,11 +33,39 @@ const clientConfig = {
 
   module: {
     rules: [
+	  {
+        test: /\.css/,
+        use: [
+          {
+            loader: 'isomorphic-style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              // CSS Loader https://github.com/webpack/css-loader
+              importLoaders: 1,
+              sourceMap: isDebug,
+              // CSS Modules https://github.com/css-modules/css-modules
+              modules: true,
+              localIdentName: isDebug ? '[name]-[local]-[hash:base64:5]' : '[hash:base64:5]',
+              // CSS Nano http://cssnano.co/options/
+              minimize: !isDebug,
+              discardComments: { removeAll: true },
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: './postcss.config.js',
+            },
+          },
+        ],
+      },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, './src'),
+          path.resolve(__dirname, '../src'),
         ],
         query: {
           presets: [
@@ -55,6 +83,11 @@ const clientConfig = {
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
       'process.env.BROWSER': true,
       __DEV__: isDebug,
+    }),
+    new AssetsPlugin({
+      path: path.resolve(__dirname, '../build/public/assets/'),
+      filename: 'assets.json',
+      prettyPrint: true,
     }),
   ],
 
