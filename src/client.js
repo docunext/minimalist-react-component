@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import createFetch from './createFetch';
 import history from './history';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import testApp from './store/reducers';
 
 const initialState = window.__INITIAL_STATE__;
 const MOUNT_NODE = document.getElementById('app');
@@ -20,9 +23,13 @@ const context = {
   }),
 };
 
-
 let currentLocation = history.location;
 let router = require('./router').default;
+
+
+
+let store = createStore(testApp,
+         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 async function onLocationChange(location, action) {
 
@@ -34,7 +41,9 @@ async function onLocationChange(location, action) {
     currentLocation = location;
 
 	ReactDOM.render(
-	  <App context={context}>{route.component}</App>,
+      <Provider store={store}>
+          <App context={context}>{route.component}</App>
+      </Provider>,
 	  MOUNT_NODE
 	);
 

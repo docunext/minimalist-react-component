@@ -8,6 +8,9 @@ import router from './router';
 import App from './components/App';
 import createFetch from './createFetch';
 import assets from './assets.json'; 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import testApp from './store/reducers';
 
 const serverPort = process.env.PORT || 3000;
 const app = express();
@@ -22,6 +25,7 @@ if (process.env.API_CONFIG) {
 	}
 }
 			
+let store = createStore(testApp);
 
 app.use(express.static(path.join(__dirname, '../build/public')));
 
@@ -48,7 +52,7 @@ app.get('*', async (req, res, next) => {
     });
 
     const data = { ...route };
-    data.children = ReactDOM.renderToString(<App context={context}>{route.component}</App>);
+    data.children = ReactDOM.renderToString(<Provider store={store}><App context={context}>{route.component}</App></Provider>);
     data.styles = [
       { id: 'css', cssText: [...css].join('') },
     ];
