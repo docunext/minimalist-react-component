@@ -100,6 +100,11 @@ const clientConfig = {
     net: 'empty',
     tls: 'empty',
   },
+  watch: true,
+  watchOptions: {
+      aggregateTimeout: 300,
+      ignored: /node_modules/
+  },
 };
 
 module.exports = clientConfig;

@@ -5,12 +5,33 @@ import s from './Header.css';
 import Link from '../Link';
 import SetName from '../../containers/setName';
 
-const Header = () => (
-    <div className={s.header}>
-        <SetName />
-        <span>Simple Component</span>
-        <Link to="/">Home</Link>
-    </div>
-);
+export class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.linkText = props.myName || 'Something';
+    }
 
-export const StyledHeader = withStyles(s)(Header);
+    render() {
+        this.linkText = this.props.myName || 'Something';
+        return (
+            <div className={s.header}>
+                <ul>
+                <li>
+                <SetName />
+                </li>
+                <li>
+                <Link to="/">{this.linkText}</Link>
+                </li>
+                </ul>
+            </div>
+        );
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+  let myName = state.testApp.myName || '';
+  return {
+      myName
+  };
+}
+export const StyledHeader = connect(mapStateToProps)(withStyles(s)(Header));

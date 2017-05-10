@@ -2,3 +2,18 @@
     height: 30px;
     background-color: #95EE52;
 }
+.header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header li, .header form {
+    float: left;
+    display: inline;
+}
+
+.header li a {
+    display: block;
+    width: 60px;
+}

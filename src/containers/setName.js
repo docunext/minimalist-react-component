@@ -22,17 +22,10 @@ let SetName = ({ myName, dispatch }) => {
         <button type="submit">
           Set Name
         </button>
-        <Link to="/">{myName}</Link>
       </form>
     </div>
   );
 }
-const mapStateToProps = (state, ownProps) => {
-  let myName = state.testApp.myName || '';
-  return {
-      myName: myName
-  };
-}
-SetName = connect(mapStateToProps)(SetName);
+SetName = connect()(SetName);
 
 export default SetName;

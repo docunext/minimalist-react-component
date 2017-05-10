@@ -123,6 +123,11 @@ const clientConfig = {
     __filename: false,
     __dirname: false,
   },
+  watch: true,
+  watchOptions: {
+      aggregateTimeout: 300,
+      ignored: /node_modules/
+  },
 };
 
 module.exports = clientConfig;
