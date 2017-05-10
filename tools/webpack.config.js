@@ -6,28 +6,28 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE.txt file in the root directory of this source tree.
  */
-
 const path = require('path');
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
-const pkg = require('./package.json');
 
 const isDebug = !process.argv.includes('--release');
 const isVerbose = process.argv.includes('--verbose');
 
 const clientConfig = {
 
-  name: 'server',
-  target: 'node',
+  context: path.resolve(__dirname, '..'),
+
+  name: 'client',
+  target: 'web',
 
   entry: {
-    server: ['babel-polyfill', './src/server.es6.js'],
+    client: ['babel-polyfill', './src/client.js'],
   },
 
   output: {
-    path: path.resolve(__dirname, './build'),
+    path: path.resolve(__dirname, '../build/public/assets'),
+    publicPath: '/assets/',
     pathinfo: isVerbose,
-    libraryTarget: 'commonjs2',
     filename: '[name].js'
   },
 
@@ -65,36 +65,27 @@ const clientConfig = {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, './src'),
+          path.resolve(__dirname, '../src'),
         ],
         query: {
           presets: [
             'stage-2',
-            'react',
-			['env', {
-              targets: {
-                node: 'current'
-              },
-              modules: false,
-              useBuiltIns: false,
-              debug: false,
-            }]
+            'react'
           ]
         }
-      }
+      } 
     ]
   },
-
   plugins: [
     // Define free variables
     // https://webpack.github.io/docs/list-of-plugins.html#defineplugin
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': isDebug ? '"development"' : '"production"',
-      'process.env.BROWSER': false,
+      'process.env.BROWSER': true,
       __DEV__: isDebug,
     }),
     new AssetsPlugin({
-      path: path.resolve(__dirname, './build'),
+      path: path.resolve(__dirname, '../build/public/assets/'),
       filename: 'assets.json',
       prettyPrint: true,
     }),
@@ -104,23 +95,10 @@ const clientConfig = {
   // http://webpack.github.io/docs/configuration.html#devtool
   devtool: isDebug ? 'cheap-module-source-map' : false,
 
-  externals: [
-    /^\.\/assets\.json$/,
-    (context, request, callback) => {
-      const isExternal =
-        request.match(/^[@a-z][a-z/.\-0-9]*$/i) &&
-        !request.match(/\.(css|less|scss|sss)$/i);
-      callback(null, Boolean(isExternal));
-    },
-  ],
-
   node: {
-    console: false,
-    global: false,
-    process: false,
-    Buffer: false,
-    __filename: false,
-    __dirname: false,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
   },
 };
 

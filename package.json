@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/server.es6.js",
   "scripts": {
-    "build": "webpack --watch & webpack --config webpack.config.server.js",
-    "start": "babel-node src/server.es6.js",
+    "build": "./tools/build.sh",
+    "start": "./tools/build.sh && nodemon build/server.js",
     "test": "mocha"
   },
   "author": "Albert Lash",
