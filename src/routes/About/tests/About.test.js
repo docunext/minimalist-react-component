@@ -3,10 +3,10 @@ import { expect } from 'chai';
 import { shallow, render, mount } from 'enzyme';
 import 'jsdom-global/register';
 
-import { HomeView } from '../components/HomeView';
+import { About } from '../components/About';
 
-describe('<HomeView />', function() {
+describe('<About />', function() {
   it("contains spec with an expectation", function() {
-    expect(shallow(<HomeView />).contains(<h3>Hello, world!</h3>)).to.equal(true);
+    expect(shallow(<About />).contains(<h3>About</h3>)).to.equal(true);
   });
 });

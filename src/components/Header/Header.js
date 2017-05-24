@@ -9,10 +9,13 @@ const Header = (props) => (
     <div className={s.header}>
         <ul>
         <li>
-        <SetName />
+        <Link to="/">{props.myName || 'Home'}</Link>
         </li>
         <li>
-        <Link to="/">{props.myName || 'Something'}</Link>
+        <Link to="/about">About</Link>
+        </li>
+        <li>
+        <SetName />
         </li>
         </ul>
     </div>

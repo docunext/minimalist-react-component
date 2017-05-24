@@ -20,7 +20,7 @@ let SetName = ({ myName, dispatch }) => {
           input = node
         }} />
         <button type="submit">
-          Set Name
+          Search
         </button>
       </form>
     </div>

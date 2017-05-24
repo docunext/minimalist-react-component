@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Layout.css';
 import { StyledHeader } from '../Header';
+import { StyledSidebar } from '../Sidebar';
 
 class Layout extends React.Component {
   static propTypes = {
@@ -20,9 +21,12 @@ class Layout extends React.Component {
 
   render() {
     return (
-      <div className={s.blue}>
+      <div className={s.page}>
         <StyledHeader />
-        {this.props.children}
+        <StyledSidebar />
+        <div className={s.pageContainer}>
+            {this.props.children}
+        </div>
       </div>
     );
   }

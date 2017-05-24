@@ -1,19 +1,21 @@
 .header {
-    height: 30px;
-    background-color: #95EE52;
+    background-color: #3f5844;
+    padding-top: 50px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+
 }
 .header ul {
+    display: flex;
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.header li, .header form {
-    float: left;
-    display: inline;
+.header li {
+    flex: 1 1 auto;
 }
-
-.header li a {
-    display: block;
-    width: 60px;
+.header li form, .header li a {
+  padding: 0 20px 0 20px;
 }

@@ -1,11 +1,17 @@
-html {
-  color: blue;
+html, body {
   font-weight: 100;
   font-size: 1em; /* ~16px; */
   line-height: 1.375; /* ~22px */
   font-family: Arial;
+  background-color: #626262;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
-.blue {
-    color: blue;
+.page {
+    color: #111;
+}
+
+.pageContainer {
 }
