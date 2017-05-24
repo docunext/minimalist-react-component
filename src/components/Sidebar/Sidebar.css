@@ -3,5 +3,20 @@
     height: 640px;
     background-color: #7a738d;
     float: left;
+    padding-top: 10px;
     margin-right: 10px;
+}
+
+.sidebar ul {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar li {
+    flex: 1 1 auto;
+}
+.sidebar li form, .sidebar li a {
+  padding: 0 20px 0 20px;
 }

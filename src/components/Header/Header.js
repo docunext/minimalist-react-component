@@ -5,11 +5,11 @@ import s from './Header.css';
 import Link from '../Link';
 import SetName from '../../containers/setName';
 
-const Header = (props) => (
+const Header = () => (
     <div className={s.header}>
         <ul>
         <li>
-        <Link to="/">{props.myName || 'Home'}</Link>
+        <Link to="/">Home</Link>
         </li>
         <li>
         <Link to="/about">About</Link>
