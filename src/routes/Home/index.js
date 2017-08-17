@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledHomeView } from './components/HomeView';
-import Layout from '../../components/Layout';
+import Layout from '../../containers/Layout';
 
 export default {
 

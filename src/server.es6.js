@@ -1,11 +1,11 @@
 import express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import Html from './components/Html';
+import Html from './containers/Html';
 import World from './routes/Home';
 import path from 'path';
 import router from './router';
-import App from './components/App';
+import App from './containers/App';
 import createFetch from './createFetch';
 import assets from './assets.json'; 
 import { Provider } from 'react-redux';

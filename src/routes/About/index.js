@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyledAbout } from './components/About';
-import Layout from '../../components/Layout';
+import Layout from '../../containers/Layout';
 
 export default {
 

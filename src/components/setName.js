@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setName } from '../store/actions';
-import Link from '../components/Link';
+import Link from '../containers/Link';
 
 let SetName = ({ myName, dispatch }) => {
   let input;

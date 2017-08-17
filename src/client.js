@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import App from './containers/App';
 import createFetch from './createFetch';
 import history from './history';
 import { Provider } from 'react-redux';

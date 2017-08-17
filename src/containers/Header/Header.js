@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Header.css';
 import Link from '../Link';
-import SetName from '../../containers/setName';
+import SetName from '../../components/setName';
 
 const Header = () => (
     <div className={s.header}>
